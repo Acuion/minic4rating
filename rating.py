@@ -48,6 +48,5 @@ sortedRating = sorted(rating.items(), key=lambda kv: trueskill.expose(kv[1]), re
 result = ""
 for (num, rate) in enumerate(sortedRating):
     result += '{}) {} ({})\n'.format(num, rate[0], str(rate[1]))
-print(result)
 with open('rating.txt', 'w') as f:
     f.write(result)
