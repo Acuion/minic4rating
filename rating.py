@@ -21,7 +21,7 @@ def getRating():
             if 'Проверено' != tds[2].text.strip():
                 print('Is in progress')
                 continue
-            thisRating = list(map(lambda x: x.text.strip(), tds[5].findAll(class_='profile-link')))
+            thisRating = list(map(lambda x: (x.text.strip(), x['href']), tds[5].findAll(class_='profile-link')))
             if 2 == len(thisRating):
                 print('Is a duel')
                 continue # duel
@@ -47,6 +47,6 @@ sortedRating = sorted(rating.items(), key=lambda kv: trueskill.expose(kv[1]), re
 
 result = ""
 for (num, rate) in enumerate(sortedRating):
-    result += '{}) {} ({})\n'.format(num + 1, rate[0], str(rate[1]))
+    result += '{}) [{}](https://aicups.ru{}) ({})\n'.format(num + 1, rate[0][0], rate[0][1], str(rate[1]))
 with open('rating.txt', 'w', encoding='utf8') as f:
     f.write(result)
